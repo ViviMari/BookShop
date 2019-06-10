@@ -4,15 +4,15 @@ export default class Books extends React.Component {
     constructor() {
         super();
         this.state = {
-            book: [],
+            books: [],
             loading: true
         }
     }
 
     componentDidMount() {
-        fetch('http://localhost:4730/book')
+        fetch('http://localhost:4730/books')
             .then(data => data.json())
-            .then(data => this.setState({ book: data, loading: false }));
+            .then(data => this.setState({ books: data, loading: false }));
     }
 
     render() {
@@ -20,7 +20,7 @@ export default class Books extends React.Component {
         return <div class="list-group">
             <h2 class="text-info">BUCH AUSWAHL </h2>
             {this.state.loading ? 'LOADING...' : ''}                   
-            {this.state.book.map(b => <a href={`/book/${b.isbn},${b.title}`} class="list-group-item list-group-item-action">Titel: {b.title} <br></br> ISBN: {b.isbn}  </a>)}
+            {this.state.books.map(b => <a href={`/book/${b.isbn},${b.title}`} class="list-group-item list-group-item-action">Titel: {b.title} <br></br> ISBN: {b.isbn}  </a>)}
         </div>
     }
 }
