@@ -15,19 +15,19 @@ export default class BookSearch extends React.Component {
     render() {
         return (
             <>
-                <h2 class="text-info">BUCH SUCHEN </h2>
+                <h2 className="text-info">BUCH SUCHEN </h2>
                 <form>
                     <label>
                         ISBN:
                         <input
-                        class="form-control" 
+                        className="form-control" 
                             type="text"
                             name="isbn"
                             onChange={e => this.onIsbnChange(e)}
                             value={this.state.isbn}
                         />
                     </label>
-                    <Link class="btn btn-primary" to={`/book/${this.state.isbn}`}>Buchdetails anzeigen</Link>
+                    <Link className="btn btn-primary" to={`/book/${this.state.isbn}`}>Buchdetails anzeigen</Link>
                     
 
                 </form>

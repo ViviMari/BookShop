@@ -8,9 +8,9 @@ export default class Dashboard extends React.Component {
     render() {
         return (
             <>
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
+                <div className="container">
+                    <div className="row">
+                        <div className="col">
                             
                             <Header />
                             <Navigation />

@@ -1,8 +1,8 @@
 import React from 'react';
 
-
-export default class NewBook extends React.Component {
-    state = {
+export default class ChangeBook extends React.Component {
+    
+    state = { //infors werden direkt im state abgelegt
         title: '',
         subtitle: '',
         isbn: '',
@@ -25,8 +25,8 @@ export default class NewBook extends React.Component {
 
 
     sendForm() {
-        fetch('http://localhost:4730/books', {
-            method: 'POST',
+        fetch('http://localhost:4730/books/'+this.props.match.params.isbn, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -35,8 +35,6 @@ export default class NewBook extends React.Component {
                 subtitle: this.state.subtitle,
                 isbn: this.state.isbn,
                 author: this.state.author,
-
-
             })
         })
             .then(
@@ -44,11 +42,32 @@ export default class NewBook extends React.Component {
                 error => console.log(error)
             );
     }
+    
+    constructor() {
+        super();
+        this.state = {
+            book: {}, // objekt{} bei class []
+            loading: true
+        }
+    }
 
+    componentDidMount() {
+        fetch('http://localhost:4730/books/'+this.props.match.params.isbn)
+            .then(data => data.json())
+            .then(data => this.setState ({ 
+                title:data.title,
+                subtitle:data.subtitle,
+                author:data.author,
+                isbn:data.isbn,
+                loading: false})); //console.log(data)) um es in der console anzuzeigen
+    }
+ 
     render() {
+        
         return (
+            
             <form>
-                <h2 className="text-info">BUCH HINZUFÜGEN </h2>
+                <h2 className="text-info">BUCH Bearbeiten </h2>
                 <div className="form-group">
                     <label>
                         Title:
@@ -66,7 +85,7 @@ export default class NewBook extends React.Component {
                         value={this.state.subtitle} />
                     </label>
                 </div>
-
+                
                 <div className="form-group">
                     <label>
                         Author:
@@ -76,17 +95,17 @@ export default class NewBook extends React.Component {
 
                     </label>
                 </div>
-                
+
                 <div className="form-group">
                     <label>
                         ISBN:
                         <input className="form-control" type="text" name="isbn" 
                         onChange={e => this.onIsbnChange(e)} 
-                        value={this.state.isbn} />
+                        value={this.state.isbn}/>
                     </label>
                 </div>
 
-                <button className="btn btn-primary" onClick={() => this.sendForm()}>Submit</button>
+                <button className="btn btn-primary" onClick={() => this.sendForm()}>Bearbeiten</button>
 
             </form>
         );

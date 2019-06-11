@@ -7,6 +7,6 @@ export default class Header extends React.Component {
             backgroundColor: 'white',
         };
     
-        return <h1 class="text-center" style={STYLE}>Looks4Books</h1>;
+        return <h1 className="text-center" style={STYLE}>Looks4Books</h1>;
     }
 }

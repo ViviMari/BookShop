@@ -17,10 +17,13 @@ export default class Books extends React.Component {
 
     render() {
         
-        return <div class="list-group">
-            <h2 class="text-info">BUCH AUSWAHL </h2>
+        return (<div className="list-group">
+            <h2 className="text-info">BUCH AUSWAHL </h2>
             {this.state.loading ? 'LOADING...' : ''}                   
-            {this.state.books.map(b => <a href={`/book/${b.isbn},${b.title}`} class="list-group-item list-group-item-action">Titel: {b.title} <br></br> ISBN: {b.isbn}  </a>)}
+            {this.state.books.map(b => <a href={`/book/${b.isbn}`} key={b.isbn} className="list-group-item list-group-item-action">
+                                        Titel: {b.title} <br></br> ISBN: {b.isbn}  </a>)}
         </div>
+        
+        )
     }
 }
